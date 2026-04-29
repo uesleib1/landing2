@@ -1,0 +1,228 @@
+/* =========================
+   BASE DO JOGO
+========================= */
+body {
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #123a4d, #050f14);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* =========================
+   CONTAINER PRINCIPAL
+========================= */
+.container {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 10px;
+}
+
+/* =========================
+   GRID (CAÇA-PALAVRAS)
+========================= */
+#grid {
+  display: grid;
+  gap: 3px;
+  user-select: none;
+  touch-action: none;
+
+  padding: 12px;
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 10px 35px rgba(0, 0, 0, 0.5),
+    inset 0 0 10px rgba(255, 255, 255, 0.05);
+}
+
+/* =========================
+   CÉLULAS
+========================= */
+.cell {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #163a4d;
+  border-radius: 7px;
+
+  font-weight: bold;
+  font-size: 18px;
+  color: #ffffff;
+
+  cursor: pointer;
+
+  transition: all 0.15s ease-in-out;
+
+  box-shadow: inset 0 0 6px rgba(255, 255, 255, 0.05);
+}
+
+/* hover */
+.cell:hover {
+  background: #1f5a73;
+  transform: scale(1.05);
+}
+
+/* seleção */
+.cell.selected {
+  background: #2ecc71;
+  color: #000;
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(46, 204, 113, 0.8);
+}
+
+/* palavra encontrada */
+.cell.found {
+  background: #f1c40f;
+  color: #000;
+  text-decoration: line-through;
+  box-shadow: 0 0 14px rgba(241, 196, 15, 0.8);
+}
+
+/* =========================
+   PAINEL DE PALAVRAS
+========================= */
+.panel {
+  max-width: 240px;
+  min-width: 200px;
+
+  padding: 12px;
+  border-radius: 14px;
+
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* =========================
+   PALAVRAS
+========================= */
+.word {
+  padding: 8px;
+  margin: 6px 0;
+
+  background: #1e4b63;
+  border-radius: 8px;
+
+  text-align: center;
+  font-weight: bold;
+
+  transition: all 0.2s ease;
+  letter-spacing: 0.5px;
+}
+
+.word.found {
+  background: #27ae60;
+  color: #fff;
+  text-decoration: line-through;
+  transform: scale(0.98);
+}
+
+/* =========================
+   SELECT (caso use no futuro)
+========================= */
+select {
+  padding: 10px 14px;
+  margin-bottom: 20px;
+
+  font-size: 15px;
+
+  background: rgba(30, 75, 99, 0.85);
+  color: white;
+
+  border: none;
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(6px);
+
+  transition: all 0.2s ease;
+}
+
+select:hover {
+  background: #2a6e8a;
+}
+
+/* =========================
+   MENSAGEM FINAL
+========================= */
+#mensagem {
+  margin-top: 15px;
+  padding: 12px;
+
+  background: #27ae60;
+  color: white;
+
+  border-radius: 8px;
+
+  display: none;
+  font-weight: bold;
+
+  box-shadow: 0 0 15px rgba(39, 174, 96, 0.5);
+}
+
+/* =========================
+   MOBILE MELHORADO (VERTICAL)
+========================= */
+/* =========================
+   MOBILE MELHORADO (VERTICAL)
+========================= */
+@media (max-width: 600px) {
+
+  /* empilha tudo */
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* painel de palavras no topo */
+  .panel {
+    order: -1;
+    width: 100%;
+    max-width: 320px;
+    margin-bottom: 12px;
+    padding: 10px;
+  }
+
+  /* 🔥 LISTA EM 2 COLUNAS */
+  #wordList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+
+  /* palavras menores e mais compactas */
+  .word {
+    font-size: 12px;
+    padding: 5px;
+    margin: 0;
+  }
+
+  /* grid mais compacto */
+  #grid {
+    gap: 2px;
+    padding: 10px;
+  }
+
+  /* células menores */
+  .cell {
+  width: calc((100vw - 40px) / 12);
+  height: calc((100vw - 40px) / 12);
+  font-size: calc((100vw - 40px) / 28);
+  }
+}
