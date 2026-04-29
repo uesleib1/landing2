@@ -261,6 +261,7 @@ select:hover {
     max-width: 430px;
     gap: 3px;
     padding: 10px;
+    transform: translateY(-10px);
   }
 
   /* 🔥 LETRAS MAIORES */
