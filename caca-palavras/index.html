@@ -8,6 +8,28 @@
 </head>
 <body>
 
+<!-- =========================
+     TELA INICIAL (INSTRUÇÕES)
+========================= -->
+<div id="introScreen" class="intro-screen">
+  <div class="intro-card">
+    
+    <button id="closeIntro" class="close-btn">✖</button>
+
+    <h1>Caça-Palavras Limnológico</h1>
+
+    <p>
+      Encontre todas as palavras relacionadas ao mundo do fitoplâncton!<br><br>
+      Arraste o dedo ou mouse para selecionar palavras<br>
+      Descubra curiosidades a cada acerto<br>
+      Complete o desafio para vencer
+    </p>
+
+    <button id="startBtn">Começar</button>
+
+  </div>
+</div>
+
 <div class="container">
   <div id="grid"></div>
 
@@ -16,15 +38,15 @@
   </div>
 </div>
 
+<!-- VITÓRIA -->
 <div id="winScreen" class="win-screen hidden">
   <div class="win-card">
-    <h1>Parabéns!</h1>
     <p>Você encontrou todas as palavras!</p>
-
     <button id="restartBtn">Jogar novamente</button>
   </div>
 </div>
 
+<!-- POPUP INFO -->
 <div id="infoPopup" class="info-popup hidden">
   <div class="info-card">
     <p id="infoText"></p>
