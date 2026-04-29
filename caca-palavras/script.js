@@ -1,20 +1,43 @@
+
 // ===============================
 // BANCO DE PALAVRAS
 // ===============================
 const wordSets = [
-  "ALGAS", "OCEANOS", "LAGOS", "ÁGUA", "VIDA", "RIOS", "LAGOA", "OXIGÊNIO",
-  "FLUTUANTE", "PLANCTON", "REPRESA", "MACROFITA", "TROFIA",
+  "ALGAS", "OCEANO", "LAGO", "ÁGUA", "VIDA", "RIO", "LAGOA", "OXIGÊNIO",
+  "FLUTUANTE", "PLANCTON", "REPRESA", "MACRÓFITA", "TROFIA",
   "FITOPLÂNCTON",
   "CLOROFILA", "MICROALGA", "DIATOMÁCEA",
   "DIVERSIDADE",
   "BIOINDICADOR", "CIANOTOXINA", "TURBIDEZ",
   "CIANOBACTÉRIA", "EUGLENÓFITA",
   "SEDIMENTAÇÃO", "UNICELULAR",
-  "DESMÍDIAS", "COLONIAL", "SUBMERSA"
+  "DESMÍDIA", "COLONIAL", "SUBMERSA"
 ];
 
 // ===============================
-// 🔥 GRID MAIS VERTICAL
+// CURIOSIDADES
+// ===============================
+const facts = [
+  "Fitoplâncton produz mais de 50% do oxigênio do planeta",
+  "Diatomáceas possuem parede de sílica",
+  "Ele é a base da cadeia alimentar aquática",
+  "Cianobactérias são organismos fotossintéticos muito antigos",
+  "Clorofila permite capturar energia da luz solar",
+
+  "Fitoplâncton vive principalmente na superfície da água",
+  "A proliferação de fitoplâncton pode mudar a cor da água",
+  "Alguns tipos de fitoplâncton brilham no escuro ",
+  "Diatomáceas ajudam na formação de sedimentos marinhos",
+  "O fitoplâncton é chamado de ‘floresta invisível dos oceanos’"
+];
+
+// ===============================
+// CONTROLE DE CURiosidades
+// ===============================
+let usedFacts = [];
+
+// ===============================
+// GRID
 // ===============================
 let rows = 11;
 let cols = 8;
@@ -48,7 +71,7 @@ function initGame() {
   let success = false;
 
   while (!success) {
-    words = getRandomWords(wordSets, 4);
+    words = getRandomWords(wordSets, 5);
 
     createEmptyGrid();
 
@@ -139,14 +162,13 @@ function fillEmptyCells() {
 }
 
 // ===============================
-// ===============================
 function renderGrid() {
   gridElement.innerHTML = "";
-
   gridElement.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
 
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
+
       const cell = document.createElement("div");
       cell.classList.add("cell");
       cell.textContent = grid[r][c];
@@ -154,7 +176,7 @@ function renderGrid() {
       cell.dataset.col = c;
 
       cell.addEventListener("pointerdown", startSelect);
-      cell.addEventListener("pointermove", moveSelect); // 🔥 TROCA AQUI
+      cell.addEventListener("pointermove", moveSelect);
       cell.addEventListener("pointerup", endSelect);
       cell.addEventListener("dragstart", e => e.preventDefault());
 
@@ -184,19 +206,18 @@ function startSelect(e) {
   addCell(e.target);
 }
 
+// ===============================
 function moveSelect(e) {
   if (!isSelecting) return;
 
-  const element = document.elementFromPoint(
-    e.clientX,
-    e.clientY
-  );
+  const element = document.elementFromPoint(e.clientX, e.clientY);
 
   if (element && element.classList.contains("cell")) {
     addCell(element);
   }
 }
 
+// ===============================
 function endSelect() {
   isSelecting = false;
   checkWord();
@@ -216,6 +237,7 @@ function addCell(cell) {
   selectedCells.push(cell);
 }
 
+// ===============================
 function clearSelection() {
   document.querySelectorAll(".cell.selected").forEach(c => {
     c.classList.remove("selected");
@@ -274,9 +296,31 @@ function checkWord() {
         cell.classList.remove("selected");
       });
 
+      showFact();
       checkWin();
     }
   }
+}
+
+// ===============================
+function showFact() {
+
+  if (usedFacts.length === facts.length) {
+    usedFacts = [];
+  }
+
+  let availableFacts = facts.filter(f => !usedFacts.includes(f));
+
+  const random = availableFacts[Math.floor(Math.random() * availableFacts.length)];
+
+  usedFacts.push(random);
+
+  document.getElementById("infoText").textContent = random;
+  document.getElementById("infoPopup").classList.remove("hidden");
+
+  setTimeout(() => {
+    document.getElementById("infoPopup").classList.add("hidden");
+  }, 2500);
 }
 
 // ===============================
@@ -286,10 +330,15 @@ function checkWin() {
 
   if (total === found) {
     setTimeout(() => {
-      alert("🎉 Você completou o caça-palavras!");
-    }, 100);
+      document.getElementById("winScreen").classList.remove("hidden");
+    }, 200);
   }
 }
+
+// ===============================
+document.getElementById("restartBtn").addEventListener("click", () => {
+  location.reload();
+});
 
 // ===============================
 initGame();
