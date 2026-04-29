@@ -1,0 +1,452 @@
+/* ===== RESET + CONFIGURAÇÕES GLOBAIS ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ===== VARIÁVEIS (EXPANDIDAS) ===== */
+:root {
+  --deep-blue: #010b1a;
+  --abyss: #001427;
+  --glow-cyan: #00f2ff;
+  --glow-teal: #00c2d4;
+  --glow-purple: #6e00ff;
+  --text-light: #e6f7ff;
+  --text-muted: #8bbcd9;
+  --card-bg: rgba(6, 25, 45, 0.55);
+  --card-border: rgba(0, 242, 255, 0.3);
+  --shadow-glow: 0 0 25px rgba(0, 242, 255, 0.25);
+  --shadow-strong: 0 20px 35px -12px rgba(0,0,0,0.5);
+  --transition-smooth: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+/* ===== BODY COM FUNDO DINÂMICO ===== */
+body {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  background: radial-gradient(ellipse at 30% 20%, #021e30, var(--deep-blue) 80%);
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  line-height: 1.5;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Partículas flutuantes (sensação oceânica) */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 40%, rgba(0,242,255,0.08) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 70% 85%, rgba(0,200,255,0.06) 1px, transparent 1px);
+  background-size: 45px 45px, 30px 30px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Camada de brilho superior */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 0%, rgba(0,242,255,0.1), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Conteúdo acima do fundo */
+header, section, .games, footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== TIPOGRAFIA REFINADA ===== */
+header h1 {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #ffffff, var(--glow-cyan), #9efff0);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: -0.02em;
+  text-shadow: 0 0 20px rgba(0,242,255,0.3);
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: clamp(1rem, 4vw, 1.25rem);
+  color: var(--text-muted);
+  max-width: 650px;
+  margin: 0 auto;
+  backdrop-filter: blur(4px);
+}
+
+/* ===== HEADER COM EFEITO DE BRILHO ===== */
+header {
+  text-align: center;
+  padding: 5rem 1.5rem 3rem;
+  border-bottom: 1px solid rgba(0, 242, 255, 0.25);
+  background: linear-gradient(180deg, rgba(0,30,50,0.4) 0%, rgba(1,11,26,0) 100%);
+}
+
+/* ===== SEÇÕES GERAIS ===== */
+section {
+  text-align: center;
+  padding: 4rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+section h2 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  margin-bottom: 1.25rem;
+  background: linear-gradient(120deg, #c4f5ff, #00e0ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+section p {
+  color: var(--text-muted);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.05rem;
+}
+
+/* ===== IMPORTANCE GRID (CARDS INFORMATIVOS) ===== */
+.importance-grid {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+
+.importance-card {
+  background: rgba(6, 25, 45, 0.6);
+  backdrop-filter: blur(8px);
+  padding: 1.8rem;
+  border-radius: 1.8rem;
+  border: 1px solid var(--card-border);
+  max-width: 260px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efeito de brilho na borda ao hover */
+.importance-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 1.8rem;
+  padding: 2px;
+  background: linear-gradient(135deg, rgba(0,242,255,0), rgba(0,242,255,0.5), rgba(0,242,255,0));
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.importance-card:hover::before {
+  opacity: 1;
+}
+
+.importance-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-glow), 0 15px 30px -10px black;
+  border-color: rgba(0,242,255,0.6);
+}
+
+.importance-card h3 {
+  margin-bottom: 0.8rem;
+  color: var(--glow-cyan);
+  font-size: 1.4rem;
+}
+
+.importance-card p {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* ===== CTA BOTÃO (CHAMADA PARA AÇÃO) ===== */
+.cta {
+  margin: 1rem auto 2rem;
+}
+
+.cta a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding: 0.9rem 2.4rem;
+  border-radius: 3rem;
+  background: linear-gradient(105deg, var(--glow-cyan), var(--glow-teal));
+  color: #001a2a;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.05rem;
+  transition: var(--transition-smooth);
+  box-shadow: 0 4px 15px rgba(0,242,255,0.3);
+  border: none;
+  /* CORREÇÃO: garante que o botão seja clicável */
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 15;
+}
+
+.cta a:hover {
+  transform: scale(1.03) translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0,242,255,0.5);
+  background: linear-gradient(105deg, #00ffff, #00e5f0);
+  letter-spacing: 0.3px;
+}
+
+/* ===== GAMES CARDS (ESTILO PRINCIPAL) ===== */
+.games {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 3rem 1.5rem 5rem;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  padding: 2rem 1.8rem;
+  border-radius: 2.2rem;
+  border: 1px solid var(--card-border);
+  text-align: center;
+  max-width: 320px;
+  transition: var(--transition-smooth);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+}
+
+/* Brilho animado ao redor do card no hover */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 2.2rem;
+  padding: 2px;
+  background: linear-gradient(125deg, rgba(0,242,255,0.2), rgba(0,242,255,0.6), rgba(0,242,255,0.2));
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.45s;
+  pointer-events: none; /* já está ok */
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: var(--shadow-glow), var(--shadow-strong);
+  border-color: rgba(0,242,255,0.7);
+}
+
+.card h2 {
+  font-size: 1.9rem;
+  margin-bottom: 0.8rem;
+  background: linear-gradient(135deg, #d4f5ff, #00e5ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.card p {
+  color: var(--text-muted);
+  margin-bottom: 1.8rem;
+  font-size: 0.95rem;
+}
+
+/* CORREÇÃO PRINCIPAL: botões dos cards */
+.card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.7rem;
+  border-radius: 2.5rem;
+  border: 1.5px solid var(--glow-cyan);
+  background: rgba(0, 242, 255, 0.05);
+  color: var(--glow-cyan);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition-smooth);
+  backdrop-filter: blur(4px);
+  /* CORREÇÃO: força a clicabilidade */
+  pointer-events: auto !important;
+  position: relative;
+  z-index: 20;
+}
+
+.card a:hover {
+  background: var(--glow-cyan);
+  color: #001427;
+  box-shadow: 0 0 18px var(--glow-cyan);
+  border-color: white;
+  transform: scale(1.02);
+}
+
+/* ===== FOOTER ELEVADO ===== */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: rgba(0, 10, 20, 0.7);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(0, 242, 255, 0.25);
+  font-size: 0.85rem;
+  color: #6c9ebf;
+  margin-top: auto;
+}
+
+@media (max-width: 780px) {
+  .importance-grid {
+    display: flex;
+    overflow-x: auto;
+    gap: 1.2rem;
+    padding: 0 10px;
+
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .importance-card {
+    min-width: 85%;
+    flex: 0 0 auto;
+
+    scroll-snap-align: center;
+  }
+
+  .games {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.8rem;
+    padding: 2rem 1rem;
+  }
+  .card {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 580px) {
+  section {
+    padding: 2.5rem 1rem;
+  }
+
+  .card {
+    max-width: 100%;
+  }
+
+  .cta a {
+    padding: 0.7rem 1.8rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* ===== SCROLLBAR PERSONALIZADA (CHIC) ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  background: var(--abyss);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--glow-cyan);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #66ffff;
+}
+
+/* ===== ANIMAÇÃO DE ENTRADA SUAVE PARA CARDS (sem JS pesado) ===== */
+.card, .importance-card {
+  opacity: 0;
+  animation: fadeUp 0.6s ease forwards;
+  animation-delay: calc(0.08s * var(--order, 0));
+}
+
+.card:nth-child(1) { --order: 1; }
+.card:nth-child(2) { --order: 2; }
+.importance-card:nth-child(1) { --order: 1; }
+.importance-card:nth-child(2) { --order: 2; }
+.importance-card:nth-child(3) { --order: 3; }
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Garantia de que elementos estáticos também apareçam */
+header, section h2, section p, .cta {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== CARD "EM BREVE" ===== */
+.card-soon {
+  opacity: 0.85;
+  backdrop-filter: blur(8px);
+  transition: var(--transition-smooth);
+}
+
+.card-soon:hover {
+  opacity: 1;
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-glow);
+  border-color: rgba(0,242,255,0.5);
+}
+
+.card-soon .soon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.7rem;
+  border-radius: 2.5rem;
+  background: rgba(100, 100, 130, 0.2);
+  color: #aaa;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: not-allowed;
+  border: 1px dashed #6699aa;
+}
