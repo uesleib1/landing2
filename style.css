@@ -450,3 +450,112 @@ header, section h2, section p, .cta {
   cursor: not-allowed;
   border: 1px dashed #6699aa;
 }
+
+/* ===== BOTÃO FLUTUANTE ===== */
+.creator-bubble {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0, 242, 255, 0.1);
+  border: 1px solid rgba(0, 242, 255, 0.4);
+  color: var(--glow-cyan);
+  padding: 0.8rem 1.2rem;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 0 15px rgba(0,242,255,0.2);
+  transition: 0.3s ease;
+  z-index: 999;
+}
+
+.creator-bubble:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(0,242,255,0.5);
+}
+
+/* ===== MODAL ===== */
+.creator-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 10, 20, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+  z-index: 1000;
+}
+
+.creator-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ===== CAIXA ===== */
+.creator-box {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  max-width: 420px;
+  text-align: center;
+  position: relative;
+  box-shadow: var(--shadow-glow);
+}
+
+/* botão fechar */
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  color: var(--text-light);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.creator-name {
+  font-weight: 700;
+  margin: 0.5rem 0;
+  color: var(--glow-cyan);
+}
+
+.creator-role {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.creator-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.creator-quote {
+  font-style: italic;
+  color: #9efcff;
+  margin-bottom: 1.5rem;
+}
+
+/* links */
+.creator-links a {
+  display: inline-block;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: 1px solid var(--glow-cyan);
+  color: var(--glow-cyan);
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.creator-links a:hover {
+  background: var(--glow-cyan);
+  color: #001427;
+}

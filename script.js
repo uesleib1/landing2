@@ -18,4 +18,25 @@ window.addEventListener("DOMContentLoaded", () => {
     }, 120 * index);
   });
 
+  const bubble = document.getElementById("creatorBubble");
+const modal = document.getElementById("creatorModal");
+const closeModal = document.getElementById("closeModal");
+
+// abrir modal
+bubble.addEventListener("click", () => {
+  modal.classList.add("active");
+});
+
+// fechar modal
+closeModal.addEventListener("click", () => {
+  modal.classList.remove("active");
+});
+
+// fechar clicando fora da caixa
+modal.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    modal.classList.remove("active");
+  }
+});
+
 });
