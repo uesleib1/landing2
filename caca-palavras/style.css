@@ -30,7 +30,10 @@ body {
 ========================= */
 #grid {
   display: grid;
-  gap: 3px;
+  gap: 4px;
+
+  width: min(90vw, 520px); /* 🔥 controla tamanho geral */
+  
   user-select: none;
   touch-action: none;
 
@@ -49,8 +52,8 @@ body {
    CÉLULAS
 ========================= */
 .cell {
-  width: 40px;
-  height: 40px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
 
   display: flex;
   align-items: center;
@@ -60,9 +63,10 @@ body {
   border-radius: 7px;
 
   font-weight: bold;
-  font-size: 18px;
-  color: #ffffff;
 
+  font-size: clamp(14px, 2.5vw, 26px);
+
+  color: #ffffff;
   cursor: pointer;
 
   transition: all 0.15s ease-in-out;
@@ -184,13 +188,11 @@ select:hover {
 ========================= */
 @media (max-width: 600px) {
 
-  /* empilha tudo */
   .container {
     flex-direction: column;
     align-items: center;
   }
 
-  /* painel de palavras no topo */
   .panel {
     order: -1;
     width: 100%;
@@ -199,30 +201,80 @@ select:hover {
     padding: 10px;
   }
 
-  /* 🔥 LISTA EM 2 COLUNAS */
   #wordList {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 6px;
   }
 
-  /* palavras menores e mais compactas */
   .word {
     font-size: 12px;
     padding: 5px;
     margin: 0;
   }
 
-  /* grid mais compacto */
+  /* 🔥 GRID MAIOR NO CELULAR */
   #grid {
-    gap: 2px;
+    width: 95vw;
+    gap: 3px;
+    padding: 8px;
+  }
+
+  .cell {
+    font-size: clamp(16px, 4vw, 24px);
+  }
+}
+
+@media (max-width: 768px) {
+
+  /* mantém layout organizado */
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* painel no topo */
+  .panel {
+    order: -1;
+    width: 100%;
+    max-width: 360px;
+    margin-bottom: 14px;
+    padding: 12px;
+  }
+
+  /* lista de palavras em 2 colunas */
+  #wordList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .word {
+    font-size: 13px;
+    padding: 6px;
+    margin: 0;
+  }
+
+  /* 🔥 GRID MAIOR */
+  #grid {
+    width: 92vw;
+    max-width: 430px;
+    gap: 3px;
     padding: 10px;
   }
 
-  /* células menores */
+  /* 🔥 LETRAS MAIORES */
   .cell {
-  width: calc((100vw - 40px) / 12);
-  height: calc((100vw - 40px) / 12);
-  font-size: calc((100vw - 40px) / 28);
+    font-size: clamp(16px, 3.5vw, 26px);
+  }
+}
+
+@media (min-width: 900px) {
+  #grid {
+    width: min(70vw, 550px);
+  }
+
+  .cell {
+    font-size: clamp(18px, 1.8vw, 32px);
   }
 }
