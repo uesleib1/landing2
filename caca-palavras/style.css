@@ -231,11 +231,11 @@ select:hover {
 @media (max-width: 768px) {
 
   /* mantém layout organizado */
-  .container {
+ .container {
     flex-direction: column;
     align-items: center;
     margin-top: 0px;
-    gap: 8px;
+    gap: -2px;
   }
 
   /* painel no topo */
