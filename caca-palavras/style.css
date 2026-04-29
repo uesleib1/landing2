@@ -231,6 +231,8 @@ select:hover {
   .container {
     flex-direction: column;
     align-items: center;
+    margin-top: 0px;
+    gap: 8px;
   }
 
   /* painel no topo */
