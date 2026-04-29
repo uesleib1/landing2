@@ -20,15 +20,16 @@ const wordSets = [
 const facts = [
   "Fitoplâncton produz mais de 50% do oxigênio do planeta",
   "Diatomáceas possuem parede de sílica",
-  "Ele é a base da cadeia alimentar aquática",
+  "O Fitoplâncton é a base da cadeia alimentar aquática",
   "Cianobactérias são organismos fotossintéticos muito antigos",
-  "Clorofila permite capturar energia da luz solar",
-
   "Fitoplâncton vive principalmente na superfície da água",
   "A proliferação de fitoplâncton pode mudar a cor da água",
   "Alguns tipos de fitoplâncton brilham no escuro ",
   "Diatomáceas ajudam na formação de sedimentos marinhos",
+  "Algas microscópicas podem se multiplicar rapidamente",
+   "O fitoplâncton é fundamental para a saúde dos ecossistemas aquático",
   "O fitoplâncton é chamado de ‘floresta invisível dos oceanos’"
+  
 ];
 
 // ===============================
@@ -302,7 +303,6 @@ function checkWord() {
   }
 }
 
-// ===============================
 function showFact() {
 
   if (usedFacts.length === facts.length) {
@@ -315,6 +315,14 @@ function showFact() {
 
   usedFacts.push(random);
 
+  // 🔊 SOM DE ACERTO
+  const sound = document.getElementById("soundCorrect");
+  if (sound) {
+    sound.currentTime = 0;
+    sound.play();
+  }
+
+  // 📢 POPUP
   document.getElementById("infoText").textContent = random;
   document.getElementById("infoPopup").classList.remove("hidden");
 
