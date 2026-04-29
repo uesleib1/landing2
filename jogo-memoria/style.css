@@ -1,0 +1,652 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ========================= */
+/* 🌌 BODY */
+/* ========================= */
+body {
+  font-family: 'Inter', sans-serif;
+
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background: black;
+
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* ========================= */
+/* 🌌 FUNDO */
+/* ========================= */
+.bg-layer {
+  position: fixed;
+  inset: 0;
+
+  background: url("img/bkg1.jpg") center center no-repeat;
+  background-size: cover;
+
+  z-index: -2;
+
+  transition: filter 0.4s ease, transform 0.4s ease;
+}
+
+body.game-active .bg-layer {
+  filter: blur(6px);
+  transform: scale(1.03);
+}
+
+/* ========================= */
+/* 📊 PROGRESSO DE FASE (AJUSTADO) */
+/* ========================= */
+.level-progress {
+  position: fixed;
+  top: 63px; /* abaixo do placar */
+  right: 12px; /* lado direito */
+
+  z-index: 6;
+
+  display: none; /* começa escondido */
+
+  flex-direction: column;
+  align-items: flex-end;
+
+  color: rgb(9, 94, 109); 
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.level-progress span {
+  margin-bottom: 4px;
+  text-align: right;
+}
+
+/* barra externa */
+.progress-bar {
+  width: 140px;
+  height: 12px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  border-radius: 20px;
+  overflow: hidden;
+
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255,255,255,0.15);
+
+  box-shadow: 
+    inset 0 2px 6px rgba(0,0,0,0.4),
+    0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* preenchimento */
+#progressFill {
+  height: 100%;
+  width: 0%;
+
+  background: linear-gradient(
+    90deg,
+    #0f766e,
+    #22c55e,
+    #7CFF6B
+  );
+
+  border-radius: 20px;
+
+  transition: width 0.4s ease;
+
+  position: relative;
+
+  box-shadow: 0 0 8px rgba(124, 255, 107, 0.5);
+}
+
+/* ========================= */
+/* FLOAT ANIMATION (NOVO) */
+/* ========================= */
+@keyframes float {
+  0% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.02);
+  }
+  100% {
+    transform: translateY(0px) scale(1);
+  }
+}
+
+/* ========================= */
+/* START SCREEN */
+/* ========================= */
+#startScreen {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 2;
+}
+
+.start-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 100%;
+  height: 100%;
+
+  justify-content: space-between;
+
+  padding: 2rem 1rem;
+}
+
+.titulo-img {
+  width: 85%;
+  max-width: 400px;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ========================= */
+/* BOTÕES MENU */
+/* ========================= */
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-btn img {
+  width: 70vw;
+  max-width: 260px;
+  transition: 0.2s ease;
+}
+
+/* ========================= */
+/* 🎮 BOTÃO START EM DESTAQUE */
+/* ========================= */
+#startBtn img {
+  width: 85vw;
+  max-width: 320px;
+}
+
+.menu-btn img:hover {
+  transform: scale(1.05);
+}
+
+/* ========================= */
+/* HOME BUTTON */
+/* ========================= */
+.home-btn {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+
+  background: transparent;
+  border: none;
+  cursor: pointer;
+
+  z-index: 5;
+
+  display: none;
+}
+
+.home-btn img {
+  width: 38px;
+}
+
+.home-btn:hover img {
+  transform: scale(1.1);
+}
+
+/* ========================= */
+/* 📊 PLACAR */
+/* ========================= */
+.game-stats {
+  display: none;
+  align-items: center;
+  gap: 1rem;
+
+  position: fixed;
+  top: 12px;
+  right: 12px;
+
+  z-index: 5;
+
+  padding: 0.6rem 1rem;
+
+  border-radius: 14px;
+
+  background: rgba(15, 25, 50, 0.55);
+  backdrop-filter: blur(10px);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  color: #e6f0ff;
+
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  box-shadow:
+    inset 0 2px 6px rgba(0,0,0,0.4),
+    0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.game-stats strong {
+  color: #7CFF6B;
+  font-weight: 700;
+}
+
+/* ========================= */
+/* 🎮 CORES DOS STATS */
+/* ========================= */
+#moves {
+  color: #60a5fa; /* azul */
+}
+
+#matches {
+  color: #7CFF6B; /* verde */
+}
+
+/* ========================= */
+/* OVERLAY BASE */
+/* ========================= */
+.overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: 0.3s ease;
+
+  z-index: 10;
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ========================= */
+/* MODAL BASE */
+/* ========================= */
+.modal {
+  background: #0b1120;
+  padding: 2rem;
+  border-radius: 16px;
+  color: white;
+
+  position: relative;
+
+  max-width: 320px;
+  width: 90%;
+}
+
+/* ========================= */
+/* MODAIS INFO */
+/* ========================= */
+#quemSomosModal .modal,
+#fitoModal .modal {
+  background: #ffffff;
+  color: #0b1b3a;
+
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+
+  max-width: 420px;
+  width: 90%;
+
+  text-align: left;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+
+  animation: popIn 0.3s ease;
+}
+
+/* ========================= */
+/* WIN SCREEN */
+/* ========================= */
+#winScreen.overlay {
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+}
+
+#winScreen .modal {
+  background: #ffffff;
+  color: #0b1b3a;
+
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+
+  text-align: center;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+/* ========================= */
+/* NEXT LEVEL MODAL */
+/* ========================= */
+#nextLevelModal .modal {
+  background: #ffffff;
+  color: #0b1b3a;
+
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+
+  text-align: center;
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+
+  animation: popIn 0.3s ease;
+}
+
+#nextLevelModal button {
+  margin-top: 0.8rem;
+
+  width: 100%;
+
+  padding: 0.8rem;
+  border-radius: 12px;
+  border: none;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+#nextLevelBtn {
+  background: #37a516;
+  color: white;
+}
+
+#nextLevelBtn:hover {
+  background: #2d8c12;
+}
+
+#menuBtn {
+  background: #1e3a8a;
+  color: white;
+}
+
+#menuBtn:hover {
+  background: #162d6b;
+}
+
+/* ========================= */
+/* CLOSE BTN */
+/* ========================= */
+.closeBtn {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+
+  background: transparent;
+  border: none;
+
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* ========================= */
+/* TABULEIRO */
+/* ========================= */
+#gameBoard {
+  display: grid;
+  gap: 6px;
+
+  width: 95vw;
+  max-width: 600px;
+
+  margin-top: 60px;
+
+  justify-content: center;
+
+  z-index: 3;
+}
+
+/* ========================= */
+/* CARTAS */
+/* ========================= */
+.card {
+  width: 100%;
+  aspect-ratio: 3/4;
+  perspective: 1000px;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+}
+
+.card-front {
+  transform: rotateY(180deg);
+}
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* CARTA ACERTADA */
+.card.matched {
+  pointer-events: none;
+  opacity: 0.6;
+  filter: brightness(1.1) saturate(1.2);
+
+  animation: matchPop 0.4s ease;
+  box-shadow: 0 0 12px rgba(124, 255, 107, 0.8);
+}
+
+/* ========================= */
+/* ANIMAÇÃO */
+/* ========================= */
+@keyframes popIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes matchPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* ========================= */
+/* BOTÃO WIN SCREEN */
+/* ========================= */
+#winScreen button {
+  background: #37a516;
+  color: white;
+
+  border: none;
+  padding: 0.9rem 1.4rem;
+  border-radius: 14px;
+
+  font-weight: 600;
+  font-size: 1rem;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+#winScreen button:hover {
+  background: #1448c7;
+  transform: scale(1.05);
+}
+
+/* ========================= */
+/* 🌟 STREAK POPUP (NOVA FUNÇÃO) */
+/* ========================= */
+.streak-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%) scale(0.8);
+
+  background: rgba(10, 20, 35, 0.85);
+  color: #ffffff;
+
+  padding: 1rem 1.6rem;
+  border-radius: 16px;
+
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+
+  opacity: 0;
+  pointer-events: none;
+
+  z-index: 999;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+
+  transition: all 0.25s ease;
+}
+
+/* ANIMAÇÃO DE ENTRADA */
+.streak-popup.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* ========================= */
+/* VARIAÇÃO VISUAL POR TEMA */
+/* ========================= */
+
+/* 🔥 INCRÍVEL */
+.streak-popup:has-text("INCRÍVEL") {
+  color: #ffcc00;
+}
+
+/* 💚 BLOOM */
+.streak-popup:has-text("BLOOM") {
+  color: #7CFF6B;
+}
+
+/* ========================= */
+/* RESPONSIVO - TÍTULO */
+/* ========================= */
+
+/* 📱 CELULAR */
+@media (max-width: 600px) {
+  .titulo-img {
+    width: 90%;
+    max-width: 400px;
+  }
+}
+
+/* 💻 TABLET / PC */
+@media (min-width: 601px) {
+  .titulo-img {
+    width: 60%;
+    max-width: 500px;
+  }
+}
+
+/* ========================= */
+/* 📱 AJUSTE FINO BOTÕES MOBILE */
+/* ========================= */
+@media (max-width: 768px) {
+
+  #startBtn img {
+    width: 80vw;
+    max-width: 260px;
+  }
+
+  .menu-btn img {
+    width: 65vw;
+    max-width: 200px;
+  }
+
+}
+
+#progressFill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -40%;
+
+  width: 40%;
+  height: 100%;
+
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.6),
+    transparent
+  );
+
+  animation: shine 2s infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -40%;
+  }
+  100% {
+    left: 120%;
+  }
+}
+
+/* ========================= */
+/* ⚡ ANIMAÇÃO DOS STATS */
+/* ========================= */
+@keyframes statPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+
+.stat-animate {
+  animation: statPop 0.25s ease;
+}

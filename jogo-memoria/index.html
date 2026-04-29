@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jogo da Memória do Fitoplâncton</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- 🌌 FUNDO -->
+  <div class="bg-layer"></div>
+
+  <!-- 📊 PROGRESSO DE FASE -->
+  <div class="level-progress">
+    <span id="levelText">Fase 1 de 9</span>
+    <div class="progress-bar">
+      <div id="progressFill"></div>
+    </div>
+  </div>
+
+  <!-- 🏠 BOTÃO HOME -->
+  <button id="homeBtn" class="home-btn">
+    <img src="img/home.png" alt="Home">
+  </button>
+
+  <!-- 📊 PLACAR -->
+  <div class="game-stats">
+    <span>Jogadas: <strong id="moves">0</strong></span>
+    <span>Acertos: <strong id="matches">0</strong></span>
+  </div>
+
+  <!-- 🎮 TABULEIRO -->
+  <div id="gameBoard"></div>
+
+  <!-- 🌟 STREAK POPUP (NOVO) -->
+  <div id="streakPopup" class="streak-popup"></div>
+
+  <!-- 🌊 TELA INICIAL -->
+  <div id="startScreen" class="overlay active">
+
+    <div class="start-container">
+
+      <img src="img/titulo.png" alt="Título" class="titulo-img">
+
+      <div class="menu-buttons">
+
+        <button id="startBtn" class="menu-btn">
+          <img src="img/botao-start.png" alt="Começar">
+        </button>
+
+        <button id="quemSomosBtn" class="menu-btn">
+          <img src="img/botao-qm.png" alt="Quem somos">
+        </button>
+
+        <button id="fitoBtn" class="menu-btn">
+          <img src="img/botao-fito.png" alt="Fitoplâncton">
+        </button>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ℹ️ MODAL QUEM SOMOS -->
+  <div id="quemSomosModal" class="overlay">
+    <div class="modal">
+      <button class="closeBtn">&times;</button>
+
+      <h2>Quem somos?</h2>
+
+      <p>
+        O LATEC (Laboratório de Taxonomia e Ecologia do Fitoplâncton) da UFG desenvolve pesquisas voltadas à comunidade fitoplanctônica.
+        <br><br>
+
+        Este jogo foi desenvolvido como parte de um projeto educacional com foco em recursos didáticos e aprendizagem ativa.
+        <br><br>
+
+        <b>Desenvolvedor Web:</b> @uesleb1 <br>
+        <b>Revisor(a)s:</b> @jascieli e @anny.gif <br>
+        <b>Colaboradores:</b> @andre.acg, @laurabeatrizgm, @leandro_silvassp, @samela07, @talissonscotelano, @isadoraberocha. <br><br>
+
+        <b>© Todos os direitos reservados</b>
+      </p>
+
+    </div>
+  </div>
+
+  <!-- 🌱 MODAL FITOPLÂNCTON -->
+  <div id="fitoModal" class="overlay">
+    <div class="modal">
+      <button class="closeBtn">&times;</button>
+
+      <h2>Fitoplâncton</h2>
+
+      <p>
+        O fitoplâncton é formado por microrganismos aquáticos capazes de realizar fotossíntese, sendo a base da cadeia alimentar dos ecossistemas marinhos e de água doce.
+        <br><br>
+
+        Eles são fundamentais para a produção de oxigênio do planeta e para o equilíbrio ambiental.
+        <br><br>
+
+        Existe uma grande diversidade de formas, tamanhos e estruturas em ambientes aquáticos.
+      </p>
+
+    </div>
+  </div>
+
+  <!-- ⏭️ MODAL PRÓXIMA FASE -->
+  <div id="nextLevelModal" class="overlay">
+    <div class="modal">
+      <h2>Fase concluída!</h2>
+      <p>Deseja continuar para a próxima fase?</p>
+
+      <button id="nextLevelBtn">Próxima fase</button>
+      <button id="menuBtn">Menu principal</button>
+    </div>
+  </div>
+
+  <!-- 🎉 TELA FINAL -->
+  <div id="winScreen" class="overlay">
+    <div class="modal">
+      <h2>🎉 Parabéns!</h2>
+      <p>Você completou todas as fases 💚</p>
+      <button id="restartBtn">Jogar novamente</button>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+
+</body>
+</html>
