@@ -16,8 +16,8 @@ const wordSets = [
 // ===============================
 // 🔥 GRID MAIS VERTICAL
 // ===============================
-let rows = 14;
-let cols = 10;
+let rows = 11;
+let cols = 8;
 
 let grid = [];
 let words = [];
@@ -48,7 +48,7 @@ function initGame() {
   let success = false;
 
   while (!success) {
-    words = getRandomWords(wordSets, 6);
+    words = getRandomWords(wordSets, 4);
 
     createEmptyGrid();
 
