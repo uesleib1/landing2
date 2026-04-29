@@ -139,6 +139,7 @@ function fillEmptyCells() {
 }
 
 // ===============================
+// ===============================
 function renderGrid() {
   gridElement.innerHTML = "";
 
@@ -153,7 +154,7 @@ function renderGrid() {
       cell.dataset.col = c;
 
       cell.addEventListener("pointerdown", startSelect);
-      cell.addEventListener("pointerenter", moveSelect);
+      cell.addEventListener("pointermove", moveSelect); // 🔥 TROCA AQUI
       cell.addEventListener("pointerup", endSelect);
       cell.addEventListener("dragstart", e => e.preventDefault());
 
@@ -185,7 +186,15 @@ function startSelect(e) {
 
 function moveSelect(e) {
   if (!isSelecting) return;
-  addCell(e.target);
+
+  const element = document.elementFromPoint(
+    e.clientX,
+    e.clientY
+  );
+
+  if (element && element.classList.contains("cell")) {
+    addCell(element);
+  }
 }
 
 function endSelect() {
